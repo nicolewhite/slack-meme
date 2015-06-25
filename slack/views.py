@@ -21,24 +21,25 @@ def meme():
     params = [quote(x) for x in params]
 
     if not len(params) == 3:
-        response = "Your syntax should be in the form: /meme template; top; bottom;"
+        return "Your syntax should be in the form: /meme template; top; bottom;"
     else:
         valid_templates = get_templates().values()
 
         template = params[0]
 
         if template not in valid_templates:
-            response = "That template doesn't exist. See http://slackbot-meme.herokuapp.com/templates for valid templates."
+            return "That template doesn't exist. See http://slackbot-meme.herokuapp.com/templates for valid templates."
         else:
             top = params[1]
             bottom = params[2]
 
-            response = "http://memegen.link/{0}/{1}/{2}.jpg".format(template, top, bottom)
+            data = "http://memegen.link/{0}/{1}/{2}.jpg".format(template, top, bottom)
+            url = "https://{0}.slack.com/services/hooks/slackbot?token={1}&channel={2}".format(domain, slackbot, channel)
 
-    url = "https://{0}.slack.com/services/hooks/slackbot?token={1}&channel={2}".format(domain, slackbot, channel)
-    requests.post(url, data=response)
+            requests.post(url, data=data)
 
-    return "ok", 200
+
+    return "Success!", 200
 
 
 @app.route("/templates")
