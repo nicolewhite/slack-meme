@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, redirect
 from models import Memegen, Slack, parse_text_into_params
 
 
