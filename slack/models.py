@@ -38,10 +38,10 @@ class Memegen:
         if not top and not bottom:
             return self.BASE_URL + "/{0}.jpg".format(template)
 
-        if top and not bottom:
-            return self.BASE_URL + "/{0}/{1}".jpg.format(template, top)
+        if not bottom:
+            bottom = "%20"
 
-        if bottom and not top:
+        if not top:
             top = "%20"
 
         return self.BASE_URL + "/{0}/{1}/{2}.jpg".format(template, top, bottom)
