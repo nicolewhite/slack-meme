@@ -1,8 +1,11 @@
-from flask import Flask, request, render_template
-import requests
 from urllib import unquote, quote
 
+from flask import Flask, request, render_template
+import requests
+
+
 app = Flask(__name__)
+
 
 @app.route("/")
 def meme():
@@ -20,24 +23,31 @@ def meme():
     if not len(params) == 3:
         response = "Your syntax should be in the form: /meme template; top; bottom;"
     else:
-        template = params[0]
-        top = params[1]
-        bottom = params[2]
+        valid_templates = get_templates().values()
 
-        response = "http://memegen.link/{0}/{1}/{2}.jpg".format(template, top, bottom)
+        template = params[0]
+
+        if template not in valid_templates:
+            response = "That template doesn't exist. See http://slackbot-meme.herokuapp.com/templates for valid templates."
+        else:
+            top = params[1]
+            bottom = params[2]
+
+            response = "http://memegen.link/{0}/{1}/{2}.jpg".format(template, top, bottom)
 
     url = "https://{0}.slack.com/services/hooks/slackbot?token={1}&channel={2}".format(domain, slackbot, channel)
     requests.post(url, data=response)
 
     return "ok", 200
 
+
 @app.route("/templates")
 def templates():
-    response = requests.get("http://memegen.link/templates").json()
+    templates = get_templates()
 
     table = []
 
-    for key, value in response.items():
+    for key, value in templates.items():
         d = {}
         d["name"] = value.replace("http://memegen.link/templates/", "")
         d["description"] = key
@@ -45,4 +55,8 @@ def templates():
         d["result"] = "http://memegen.link/{0}/top-text/bottom-text.jpg".format(d["name"])
         table.append(d)
 
-    return render_template('templates.html', table=table)
+    return render_template("templates.html", table=table)
+
+
+def get_templates():
+    return requests.get("http://memegen.link/templates").json()
