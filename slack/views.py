@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import requests
 from urllib import unquote, quote
 
@@ -30,3 +30,19 @@ def meme():
     requests.post(url, data=response)
 
     return "ok", 200
+
+@app.route("/templates")
+def templates():
+    response = requests.get("http://memegen.link/templates").json()
+
+    table = []
+
+    for key, value in response.items():
+        d = {}
+        d["name"] = value.replace("http://memegen.link/templates/", "")
+        d["description"] = key
+        d["example"] = "/meme {0}; top text; bottom text;".format(d["name"])
+        d["result"] = "http://memegen.link/{0}/top-text/bottom-text.jpg".format(d["name"])
+        table.append(d)
+
+    return render_template('templates.html', table=table)
