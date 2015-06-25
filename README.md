@@ -1,5 +1,5 @@
 # slackbot-meme
-Easily create memes in Slack with slash commands.
+Easily post memes to Slack with slash commands.
 
 ## Setup
 
