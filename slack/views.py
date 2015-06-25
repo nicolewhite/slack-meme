@@ -27,3 +27,5 @@ def meme():
 
     url = "https://{0}.slack.com/services/hooks/slackbot?token={1}&channel=%23{2}".format(domain, slackbot, channel)
     requests.post(url, data=response)
+
+    return "ok", 200
