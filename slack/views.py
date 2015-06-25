@@ -26,6 +26,7 @@ def meme():
     slackbot = request.args["slackbot"]
     text = request.args["text"]
     channel = request.args["channel_id"]
+    user = request.args["user_name"]
 
     text = unquote(text)
     text = text[:-1] if text[-1] == ";" else text
@@ -46,7 +47,7 @@ def meme():
     top = params[1]
     bottom = params[2]
 
-    data = "http://memegen.link/{0}/{1}/{2}.jpg".format(template, top, bottom)
+    data = u"{0} says http://memegen.link/{1}/{2}/{3}.jpg".format(user, template, top, bottom)
     url = "https://{0}.slack.com/services/hooks/slackbot?token={1}&channel={2}".format(domain, slackbot, channel)
 
     requests.post(url, data=data)
