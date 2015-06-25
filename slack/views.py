@@ -29,6 +29,10 @@ def meme():
         return "Unauthorized."
 
     text = request.args["text"]
+
+    if text[:9] == "templates":
+        return meme.get_help()
+
     params = parse_text_into_params(text)
 
     if not len(params) == 3:

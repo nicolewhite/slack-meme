@@ -24,6 +24,16 @@ class Memegen:
 
         return data
 
+    def get_help(self):
+        templates = self.get_templates()
+
+        help = ""
+
+        for template in templates:
+            help += "*{0}*: {1}\n".format(template["name"], template["description"])
+
+        return help
+
     def build_url(self, template, top, bottom):
         return self.BASE_URL + "/{0}/{1}/{2}.jpg".format(template, top, bottom)
 
