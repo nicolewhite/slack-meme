@@ -36,7 +36,7 @@ def meme():
     params = parse_text_into_params(text)
 
     if not len(params) == 3:
-        return "Your syntax should be in the form: `/meme template; top; bottom;`"
+        return "Your syntax should be in the form: `/meme template; top; bottom;`. Type `/meme templates` to see valid templates."
 
     valid_templates = [x["name"] for x in meme.get_templates()]
 
