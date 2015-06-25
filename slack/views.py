@@ -36,14 +36,14 @@ def meme():
     params = parse_text_into_params(text)
 
     if not len(params) == 3:
-        return "Your syntax should be in the form: /meme template; top; bottom;"
+        return "Your syntax should be in the form: `/meme template; top; bottom;`"
 
     valid_templates = [x["name"] for x in meme.get_templates()]
 
     template = params[0]
 
     if template not in valid_templates:
-        return "That template doesn't exist. See https://slackbot-meme.herokuapp.com/templates for valid templates."
+        return "That template doesn't exist. Type `/meme templates` to see valid templates."
 
     top = params[1]
     bottom = params[2]
@@ -63,9 +63,3 @@ def meme():
     slack.post_meme_to_webhook(payload)
 
     return "Success!", 200
-
-
-@ssl_required
-@app.route("/templates")
-def templates():
-    return render_template("templates.html", table=Memegen().get_templates())
