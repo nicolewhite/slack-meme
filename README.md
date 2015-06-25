@@ -12,10 +12,6 @@ Post memes to any Slack channel with a slash command.
 
 <img src="http://i.imgur.com/BGkqKgC.png">
 
-## Why This Meme Integration Is Better Than Other Meme Integrations
-
-I've seen a few other community-built Slack integrations for memes, but they all require you to set up accounts on meme-generating websites and they also all use Incoming Webhooks, which you need to set up for each channel. Yikes. This integration uses Slackbots, allowing you to post memes to any channel out of the box.
-
 ## Credits
 
 This uses [memegen](https://github.com/jacebrowning/memegen). Thanks memegen!
