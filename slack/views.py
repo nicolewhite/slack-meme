@@ -51,7 +51,7 @@ def meme():
 
     requests.post(url, data=data)
 
-    return "Success!", 200
+    return 200
 
 
 @ssl_required
