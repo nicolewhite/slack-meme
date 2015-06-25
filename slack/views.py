@@ -46,10 +46,7 @@ def meme():
     meme_url = meme.build_url(template, top, bottom)
     channel_id = request.args["channel_id"]
 
-    payload = {
-        "text": meme_url,
-        "channel": channel_id
-    }
+    payload = {"text": meme_url, "channel": channel_id}
 
     user_id = request.args["user_id"]
     user = slack.find_user_info(user_id)
