@@ -1,5 +1,5 @@
 # slackbot-meme
-Easily post memes to Slack with slash commands.
+Post memes to any Slack channel with a slash command.
 
 ## Setup
 
