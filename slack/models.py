@@ -35,16 +35,10 @@ class Memegen:
         return help
 
     def build_url(self, template, top, bottom):
-        if not top and not bottom:
-            return self.BASE_URL + "/{0}.jpg".format(template)
+        path = "/{0}/{1}/{2}.jpg".format(template, top or '_', bottom or '_')
+        url = self.BASE_URL + path
 
-        if not bottom:
-            bottom = "%20"
-
-        if not top:
-            top = "%20"
-
-        return self.BASE_URL + "/{0}/{1}/{2}.jpg".format(template, top, bottom)
+        return url
 
 
 class Slack:
