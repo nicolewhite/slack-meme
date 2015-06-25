@@ -18,8 +18,6 @@ class Memegen:
             d = {}
             d["name"] = value.replace(self.BASE_URL + "/templates/", "")
             d["description"] = key
-            d["example"] = "/meme {0}; top text; bottom text;".format(d["name"])
-            d["result"] = self.BASE_URL + "/{0}/top-text/bottom-text.jpg".format(d["name"])
             data.append(d)
 
         return data
