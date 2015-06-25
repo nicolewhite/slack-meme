@@ -1,12 +1,25 @@
 from urllib import unquote, quote
+from functools import wraps
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 import requests
 
 
 app = Flask(__name__)
 
 
+def ssl_required(fn):
+    @wraps(fn)
+    def decorated_view(*args, **kwargs):
+        if not any([app.debug, request.is_secure, request.headers.get("X-Forwarded-Proto", "") == "https"]):
+            return redirect(request.url.replace("http://", "https://"))
+        else:
+            return fn(*args, **kwargs)
+
+    return decorated_view
+
+
+@ssl_required
 @app.route("/")
 def meme():
     domain = request.args["team_domain"]
@@ -28,7 +41,7 @@ def meme():
     template = params[0]
 
     if template not in valid_templates:
-        return "That template doesn't exist. See http://slackbot-meme.herokuapp.com/templates for valid templates."
+        return "That template doesn't exist. See https://slackbot-meme.herokuapp.com/templates for valid templates."
 
     top = params[1]
     bottom = params[2]
@@ -41,6 +54,7 @@ def meme():
     return "Success!", 200
 
 
+@ssl_required
 @app.route("/templates")
 def templates():
     templates = get_templates()
