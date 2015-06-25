@@ -1,6 +1,6 @@
 from flask import Flask, request
 import requests
-from urllib import unquote
+from urllib import unquote, quote
 
 app = Flask(__name__)
 
@@ -15,6 +15,7 @@ def meme():
     text = text[:-1] if text[-1] == ";" else text
     params = text.split(";")
     params = [x.strip().replace(" ", "-") for x in params]
+    params = [quote(x) for x in params]
 
     if not len(params) == 3:
         response = "Your syntax should be in the form: /meme template; top; bottom;"
