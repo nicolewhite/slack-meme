@@ -36,7 +36,7 @@ def meme():
     if not len(params) == 3:
         return "Your syntax should be in the form: /meme template; top; bottom;"
 
-    valid_templates = get_templates().values()
+    valid_templates = [x["name"] for x in get_templates()]
 
     template = params[0]
 
@@ -57,20 +57,20 @@ def meme():
 @ssl_required
 @app.route("/templates")
 def templates():
-    templates = get_templates()
+    return render_template("templates.html", table=get_templates())
 
-    table = []
 
-    for key, value in templates.items():
+def get_templates():
+    response = requests.get("http://memegen.link/templates").json()
+
+    data = []
+
+    for key, value in response.items():
         d = {}
         d["name"] = value.replace("http://memegen.link/templates/", "")
         d["description"] = key
         d["example"] = "/meme {0}; top text; bottom text;".format(d["name"])
         d["result"] = "http://memegen.link/{0}/top-text/bottom-text.jpg".format(d["name"])
-        table.append(d)
+        data.append(d)
 
-    return render_template("templates.html", table=table)
-
-
-def get_templates():
-    return requests.get("http://memegen.link/templates").json()
+    return data
