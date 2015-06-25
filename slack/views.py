@@ -4,13 +4,11 @@ from urllib import urlencode
 
 app = Flask(__name__)
 
-@app.route("/", methods=['POST'])
+@app.route("/")
 def meme():
-    form = request.form.to_dict()
-
-    slackbot = form["slackbot"]
-    text = form["text"]
-    channel = form["channel_name"]
+    slackbot = request.args["slackbot"]
+    text = request.args["text"]
+    channel = request.args["channel_name"]
 
     text = text[:-1] if text[-1] == ";" else text
     params = text.split(";")
