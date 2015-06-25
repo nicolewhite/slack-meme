@@ -33,20 +33,15 @@ def meme():
     if text[:9] == "templates":
         return meme.get_help()
 
-    params = parse_text_into_params(text)
-
-    if not len(params) == 3:
-        return "Your syntax should be in the form: `/meme template; top; bottom;`. Type `/meme templates` to see valid templates."
+    try:
+        template, top, bottom = parse_text_into_params(text)
+    except:
+        return "Your syntax should be in the form `/meme [template]; [top]; [bottom];. Type `/meme templates` to see valid templates."
 
     valid_templates = [x["name"] for x in meme.get_templates()]
 
-    template = params[0]
-
     if template not in valid_templates:
         return "That template doesn't exist. Type `/meme templates` to see valid templates."
-
-    top = params[1]
-    bottom = params[2]
 
     meme_url = meme.build_url(template, top, bottom)
     channel_id = request.args["channel_id"]

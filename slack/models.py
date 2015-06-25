@@ -35,6 +35,15 @@ class Memegen:
         return help
 
     def build_url(self, template, top, bottom):
+        if not top and not bottom:
+            return self.BASE_URL + "/{0}.jpg".format(template)
+
+        if top and not bottom:
+            return self.BASE_URL + "/{0}/{1}".jpg.format(template, top)
+
+        if bottom and not top:
+            top = "%20"
+
         return self.BASE_URL + "/{0}/{1}/{2}.jpg".format(template, top, bottom)
 
 
@@ -66,4 +75,6 @@ def parse_text_into_params(text):
     params = text.split(";")
     params = [x.strip().replace(" ", "-") for x in params]
     params = [quote(x) for x in params]
-    return params
+
+    params += [None] * (3 - len(params))
+    return params[0], params[1], params[2]
