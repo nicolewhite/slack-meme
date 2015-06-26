@@ -5,20 +5,18 @@ Post memes to any of your Slack channels with a slash command.
 
 * `SLACK_API_TOKEN`
 
-Go [here](https://api.slack.com/web) and scroll down to *Authentication*. If you haven't already, generate a token. This is 
+[Go to the Slack Web API page](https://api.slack.com/web) and scroll down to **Authentication**. If you haven't already, generate a token. This is 
 your `SLACK_API_TOKEN`.
 
 * `SLACK_WEBHOOK_URL`
 
 [Create a new Incoming Webhook](https://my.slack.com/services/new/incoming-webhook/). You can choose any channel; it doesn't matter. 
 The channel will be overridden on each request with the channel from which the request originated. After creating, you'll see 
-a *Webhook URL* field. This is your `SLACK_WEBHOOK_URL`.
+a **Webhook URL** field. This is your `SLACK_WEBHOOK_URL`.
 
 * `SLACK_SLASH_COMMAND_TOKEN`
 
-[Add a new Slash Command](https://my.slack.com/services/new/slash-commands). Call it `/meme`. After creating, you'll see a *Token* 
-field. This is your `SLACK_SLASH_COMMAND_TOKEN`. Keep this page open, as you'll need to configure the Slash Command further after 
-deploying your Heroku App.
+[Add a new Slash Command](https://my.slack.com/services/new/slash-commands). Call it `/meme`. After creating, you'll see a **Token** field. This is your `SLACK_SLASH_COMMAND_TOKEN`. Keep this page open, as you'll need to configure the Slash Command further after deploying your Heroku App.
 
 * [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
@@ -26,13 +24,11 @@ deploying your Heroku App.
 
 <img src="http://i.imgur.com/reNOSXe.png">
 
-* Click *Deploy for Free*.
+* Click **Deploy for Free**.
 
-* Once finished, the *Name* field will be populated if you didn't choose a name upfront.
+* Once finished, the **Name** field will now be populated if you didn't choose a name upfront.
 
-* Go back to your Slash Command configuration page, which you left open. Copy your app's URL into the URL field. Your app's URL
-is https://<name>.herokuapp.com. Replace `<name>` with the name of your app. Configure it to send a `GET` request to this URL. For example, 
-here is my configuration page:
+* Go back to your Slash Command configuration page, which you left open. Enter your app's URL, which is `https://name-of-app.herokuapp.com`, into the **URL** field. Replace `name-of-app` with the name of your app. Configure it to send a `GET` request to this URL. For example, here is my configuration page:
 
 <img src="http://i.imgur.com/mFtpKDX.png">
 
