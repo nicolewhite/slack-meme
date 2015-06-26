@@ -28,7 +28,7 @@ class Memegen:
         help = ""
 
         for template in templates:
-            help += "`{0}`: {1}\n".format(template["name"], template["description"])
+            help += "`{0}` {1}\n".format(template["name"], template["description"])
 
         return help
 
