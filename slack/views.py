@@ -1,6 +1,6 @@
 from functools import wraps
 from flask import Flask, request, redirect
-from models import Memegen, Slack, parse_text_into_params
+from models import Memegen, Slack
 
 
 app = Flask(__name__)
@@ -34,7 +34,7 @@ def meme():
         return meme.get_help()
 
     try:
-        template, top, bottom = parse_text_into_params(text)
+        template, top, bottom = meme.parse_text_into_params(text)
     except:
         return "Your syntax should be in the form `/meme [template]; [top]; [bottom];. Type `/meme templates` to see valid templates."
 
