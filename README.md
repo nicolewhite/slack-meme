@@ -1,6 +1,16 @@
 # slackbot-meme
 Post memes to any of your Slack channels with a slash command.
 
+## Usage
+
+`/meme success; we have; a meme bot;`
+
+<img src="http://i.imgur.com/wWU8Odx.png">
+
+View available templates with `/meme templates`:
+
+<img src="http://i.imgur.com/ohkEr9P.png">
+
 ## Setup
 
 * `SLACK_API_TOKEN`
@@ -34,11 +44,7 @@ a **Webhook URL** field. This is your `SLACK_WEBHOOK_URL`.
 
 * Save the Slash Command integration.
 
-## Usage
 
-`/meme success; we have; a meme bot;`
-
-<img src="http://i.imgur.com/wWU8Odx.png">
 
 ## Credits
 
