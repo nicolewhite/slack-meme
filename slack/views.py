@@ -1,23 +1,10 @@
-from functools import wraps
-from flask import Flask, request, redirect
+from flask import Flask, request
 from models import Memegen, Memeifier, Slack, parse_text_into_params
 
 
 app = Flask(__name__)
 
 
-def ssl_required(fn):
-    @wraps(fn)
-    def decorated_view(*args, **kwargs):
-        if not any([app.debug, request.is_secure, request.headers.get("X-Forwarded-Proto", "") == "https"]):
-            return redirect(request.url.replace("http://", "https://"))
-        else:
-            return fn(*args, **kwargs)
-
-    return decorated_view
-
-
-@ssl_required
 @app.route("/")
 def meme():
     memegen = Memegen()
