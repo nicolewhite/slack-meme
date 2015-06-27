@@ -32,21 +32,24 @@ class Memegen:
 
         return help
 
-    def parse_text_into_params(self, text):
-        text = unquote(text)
-        text = text[:-1] if text[-1] == ";" else text
-        params = text.split(";")
-        params = [x.strip().replace(" ", "-") for x in params]
-        params = [quote(x) for x in params]
-
-        params += [None] * (3 - len(params))
-        return params[0], params[1], params[2]
-
     def build_url(self, template, top, bottom):
         path = "/{0}/{1}/{2}.jpg".format(template, top or '_', bottom or '_')
         url = self.BASE_URL + path
 
         return url
+
+
+class Memeifier:
+
+    def __init__(self):
+        self.BASE_URL = "http://memeifier.com"
+
+    def image_exists(self, path):
+        r = requests.head(path)
+        return r.status_code == requests.codes.ok
+
+    def build_url(self, template, top, bottom):
+        return self.BASE_URL + "/{0}/{1}/{2}.jpg".format(top or '_', bottom or '_', template)
 
 
 class Slack:
@@ -69,3 +72,19 @@ class Slack:
 
     def post_meme_to_webhook(self, payload):
         requests.post(self.WEBHOOK_URL, data=json.dumps(payload))
+
+
+def parse_text_into_params(text):
+    text = unquote(text)
+    text = text[:-1] if text[-1] == ";" else text
+
+    params = text.split(";")
+
+    template = params[0]
+    del params[0]
+
+    params = [x.strip() for x in params]
+    params = [quote(x) for x in params]
+
+    params += [None] * (2 - len(params))
+    return template, params[0], params[1]
