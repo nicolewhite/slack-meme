@@ -24,7 +24,7 @@ def meme():
 
     template, top, bottom = parse_text_into_params(text)
 
-    valid_templates = [x["name"] for x in memegen.get_templates()]
+    valid_templates = [x[0] for x in memegen.get_templates()]
 
     if template in valid_templates:
         meme_url = memegen.build_url(template, top, bottom)

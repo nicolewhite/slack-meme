@@ -15,11 +15,11 @@ class Memegen:
         data = []
 
         for key, value in response.items():
-            d = {}
-            d["name"] = value.replace(self.BASE_URL + "/templates/", "")
-            d["description"] = key
-            data.append(d)
+            name = value.replace(self.BASE_URL + "/templates/", "")
+            description = key
+            data.append((name, description))
 
+        data.sort(key=lambda tup: tup[0])
         return data
 
     def get_help(self):
@@ -28,7 +28,7 @@ class Memegen:
         help = ""
 
         for template in templates:
-            help += "`{0}` {1}\n".format(template["name"], template["description"])
+            help += "`{0}` {1}\n".format(template[0], template[1])
 
         return help
 
