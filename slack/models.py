@@ -49,7 +49,7 @@ class Memeifier:
         return r.status_code == requests.codes.ok
 
     def build_url(self, template, top, bottom):
-        return self.BASE_URL + "/{0}/{1}/{2}.jpg".format(top or '_', bottom or '_', template)
+        return self.BASE_URL + "/{0}/{1}/{2}".format(top or '_', bottom or '_', template)
 
 
 class Slack:
