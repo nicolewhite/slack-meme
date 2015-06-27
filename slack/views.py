@@ -33,10 +33,7 @@ def meme():
     if text[:9] == "templates":
         return meme.get_help()
 
-    try:
-        template, top, bottom = meme.parse_text_into_params(text)
-    except:
-        return "Your syntax should be in the form `/meme [template]; [top]; [bottom];. Type `/meme templates` to see valid templates."
+    template, top, bottom = meme.parse_text_into_params(text)
 
     valid_templates = [x["name"] for x in meme.get_templates()]
 
