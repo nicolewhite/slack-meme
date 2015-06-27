@@ -9,7 +9,7 @@ Post memes to any of your Slack channels with a slash command.
 
 View available templates with `/meme templates`
 
-<img src="http://i.imgur.com/ohkEr9P.png">
+<img src="http://i.imgur.com/JYigq3k.png">
 
 ## Setup
 
