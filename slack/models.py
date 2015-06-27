@@ -1,6 +1,6 @@
 import json
 import os
-from urllib import unquote, quote
+from urllib import unquote_plus, quote
 import requests
 
 
@@ -75,7 +75,7 @@ class Slack:
 
 
 def parse_text_into_params(text):
-    text = unquote(text)
+    text = unquote_plus(text)
     text = text[:-1] if text[-1] == ";" else text
 
     params = text.split(";")
