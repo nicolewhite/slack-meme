@@ -45,6 +45,9 @@ class Memeifier:
         self.BASE_URL = "http://memeifier.com"
 
     def image_exists(self, path):
+        if path.split("://")[0] not in ["http", "https"]:
+            return False
+
         r = requests.head(path)
         return r.status_code == requests.codes.ok
 
