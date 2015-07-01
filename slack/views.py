@@ -7,6 +7,14 @@ app = Flask(__name__)
 
 @app.route("/")
 def meme():
+    if not request.args:
+        message = """
+        Welcome to Slack Meme!
+        Check me out on <a href="https://github.com/nicolewhite/slack-meme">GitHub</a>.
+        """
+
+        return message
+
     memegen = Memegen()
     memeifier = Memeifier()
     slack = Slack()
