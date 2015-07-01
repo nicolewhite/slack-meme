@@ -3,19 +3,30 @@ Post memes to any of your Slack channels with a slash command.
 
 ## Usage
 
+### Built-in Templates
+
 `/meme success; we have; a meme bot;`
 
 <img src="http://i.imgur.com/wWU8Odx.png">
 
-`/meme templates` shows you available templates:
+`/meme templates` shows you the available built-in templates:
 
 <img src="http://i.imgur.com/JYigq3k.png">
 
+### Custom Templates
 Use your own image by passing its URL as the template:
 
 `/meme http://nicolewhite.github.io/static/me.jpg; hello; my name is nicole;`
 
 <img src="http://i.imgur.com/dAysM4V.jpg">
+
+### Preview
+
+Hone your meme skills privately until you get it just right:
+
+`/meme preview live; i'll write it; and we'll do it live;`
+
+<img src="http://i.imgur.com/Vd1Rduw.png">
 
 ## Setup
 
