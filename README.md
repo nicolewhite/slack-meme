@@ -7,9 +7,15 @@ Post memes to any of your Slack channels with a slash command.
 
 <img src="http://i.imgur.com/wWU8Odx.png">
 
-View available templates with `/meme templates`
+`/meme templates` shows you available templates:
 
 <img src="http://i.imgur.com/JYigq3k.png">
+
+Use your own image by passing its URL as the template:
+
+`/meme http://nicolewhite.github.io/static/me.jpg; hello; my name is nicole;`
+
+<img src="http://i.imgur.com/dAysM4V.jpg">
 
 ## Setup
 
