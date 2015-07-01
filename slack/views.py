@@ -22,6 +22,9 @@ def meme():
     if text[:9] == "templates":
         return memegen.get_help()
 
+    preview = True if text[:7] == "preview" else False
+    text = text.replace("preview", "") if preview else text
+
     template, top, bottom = parse_text_into_params(text)
 
     valid_templates = [x[0] for x in memegen.get_templates()]
@@ -32,6 +35,9 @@ def meme():
         meme_url = memeifier.build_url(template, top, bottom)
     else:
         return "That template doesn't exist. Type `/meme templates` to see valid templates or provide your own as a URL."
+
+    if preview:
+        return meme_url
 
     payload = {"text": meme_url, "channel": channel_id}
     user = slack.find_user_info(user_id)

@@ -78,12 +78,12 @@ class Slack:
 
 
 def parse_text_into_params(text):
-    text = unquote_plus(text)
+    text = unquote_plus(text).strip()
     text = text[:-1] if text[-1] == ";" else text
 
     params = text.split(";")
 
-    template = params[0]
+    template = params[0].strip()
     del params[0]
 
     params = [x.strip() for x in params]
