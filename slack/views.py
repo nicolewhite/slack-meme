@@ -31,7 +31,7 @@ def meme():
         return memegen.get_help()
 
     preview = True if text[:7] == "preview" else False
-    text = text.replace("preview", "") if preview else text
+    text = text.replace("preview", "", 1) if preview else text
 
     template, top, bottom = parse_text_into_params(text)
 
