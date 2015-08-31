@@ -51,6 +51,9 @@ def meme():
     user = slack.find_user_info(user_id)
     payload.update(user)
 
-    slack.post_meme_to_webhook(payload)
+    try:
+        slack.post_meme_to_webhook(payload)
+    except Exception as e:
+        return e
 
     return "Success!", 200
