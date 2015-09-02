@@ -47,9 +47,12 @@ def meme():
     if preview:
         return meme_url
 
-    payload = {"text": meme_url, "channel": channel_id}
+    payload = {"channel": channel_id}
     user = slack.find_user_info(user_id)
     payload.update(user)
+
+    attachments = [{"image_url": meme_url, "fallback": "Oops. Something went wrong."}]
+    payload.update({"attachments": attachments})
 
     try:
         slack.post_meme_to_webhook(payload)
