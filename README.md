@@ -7,7 +7,7 @@ Post memes to any of your Slack channels with a slash command.
 
 `/meme success; we have; a meme bot;`
 
-<img src="http://i.imgur.com/wWU8Odx.png">
+<img src="http://i.imgur.com/SBLRFSo.png">
 
 `/meme templates` shows you the available built-in templates:
 
@@ -18,7 +18,7 @@ Use your own image by passing its URL as the template:
 
 `/meme http://nicolewhite.github.io/static/me.jpg; hello; my name is nicole;`
 
-<img src="http://i.imgur.com/dAysM4V.jpg">
+<img src="http://i.imgur.com/OVhBlmt.png">
 
 ### Preview
 
