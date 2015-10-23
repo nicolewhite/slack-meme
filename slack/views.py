@@ -28,7 +28,7 @@ def meme():
         return "Unauthorized."
 
     if text[:9] == "templates":
-        return memegen.get_help()
+        return memegen.list_templates()
 
     preview = True if text[:7] == "preview" else False
     text = text.replace("preview", "", 1) if preview else text

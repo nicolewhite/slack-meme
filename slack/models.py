@@ -22,7 +22,7 @@ class Memegen:
         data.sort(key=lambda tup: tup[0])
         return data
 
-    def get_help(self):
+    def list_templates(self):
         templates = self.get_templates()
 
         help = ""
