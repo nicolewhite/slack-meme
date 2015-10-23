@@ -55,11 +55,29 @@ Click **Deploy for Free**. Once finished, the **Name** field will now be populat
 
 ### Finish Slash Command Config
 
-Go back to your Slash Command configuration page, which you left open. Enter your app's URL, which is `https://name-of-app.herokuapp.com`, into the **URL** field. Replace `name-of-app` with the name of your app. Configure it to send a `GET` request to this URL. For example, here is my configuration page:
+Go back to your Slash Command configuration page, which you left open. Enter your app's URL, which is `https://your-app-name.herokuapp.com`, into the **URL** field. Replace `your-app-name` with the name of your app. Configure it to send a `GET` request to this URL. For example, here is my configuration page:
 
 <img src="http://i.imgur.com/mFtpKDX.png">
 
 Save the Slash Command integration.
+
+## Update Your Deployment
+
+To update your deployment with changes from this repository, visit your app's homepage on Heroku and navigate to the section on deploying with Heroku git at https://dashboard.heroku.com/apps/your-app-name/deploy/heroku-git, replacing `your-app-name` with the name of your app. Follow the instructions there to get the Heroku toolbelt set up. Then:
+
+```
+$ heroku login
+$ heroku git:clone -a your-app-name
+$ cd your-app-name
+```
+
+Replace `your-app-name` with the name of your app. Once you have this set up, you can update your app with changes from this repository with the following:
+
+```
+$ git remote add slack-meme https://github.com/nicolewhite/slack-meme
+$ git pull --rebase slack-meme master
+$ git push heroku master
+```
 
 ## Credits
 
