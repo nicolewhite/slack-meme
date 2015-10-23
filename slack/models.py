@@ -38,6 +38,9 @@ class Memegen:
 
         return url
 
+    def error(self):
+        return "That template doesn't exist. Type `/meme templates` to see valid templates or provide your own as a URL."
+
 
 class Memeifier:
 

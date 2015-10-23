@@ -27,6 +27,9 @@ def meme():
     if token != slack.SLASH_COMMAND_TOKEN:
         return "Unauthorized."
 
+    if text.strip() == "":
+        return memegen.error()
+
     if text[:9] == "templates":
         return memegen.list_templates()
 
@@ -42,7 +45,7 @@ def meme():
     elif memeifier.image_exists(template):
         meme_url = memeifier.build_url(template, top, bottom)
     else:
-        return "That template doesn't exist. Type `/meme templates` to see valid templates or provide your own as a URL."
+        return memegen.error()
 
     if preview:
         return meme_url
