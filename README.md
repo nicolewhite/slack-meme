@@ -28,6 +28,10 @@ Hone your meme skills privately until you get it just right:
 
 <img src="http://i.imgur.com/Vd1Rduw.png">
 
+### How It Works
+
+The memes are posted under a bot in the same channel where `/meme` was called, where the bot's picture and username are replaced with your own. Because a bot is posting the meme and not you, you will not be able to delete memes once they are sent.
+
 ## Setup
 
 ### Slack API Token
