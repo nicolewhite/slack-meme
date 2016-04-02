@@ -1,0 +1,8 @@
+meme-slack-bot:
+  build: .
+  environment:
+    - 'SLACK_API_TOKEN=replace-with-your-stuff'
+    - 'SLACK_WEBHOOK_URL=replace-with-your-stuff'
+    - 'SLACK_SLASH_COMMAND_TOKEN=replace-with-your-stuff'
+  ports:
+    - '5000:5000'
