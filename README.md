@@ -22,11 +22,7 @@ Use your own image by passing its URL as the template:
 
 ### Preview
 
-Hone your meme skills privately until you get it just right:
-
-`/meme preview live; i'll write it; and we'll do it live;`
-
-<img src="http://i.imgur.com/Vd1Rduw.png">
+Hone your meme skills privately by practicing in the slackbot channel.
 
 ### How It Works
 
