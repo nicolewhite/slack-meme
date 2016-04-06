@@ -32,8 +32,12 @@ class Memegen:
 
         return help
 
-    def build_url(self, template, top, bottom):
+    def build_url(self, template, top, bottom, alt=None):
         path = "/{0}/{1}/{2}.jpg".format(template, top or '_', bottom or '_')
+
+        if alt:
+            path += "?alt={}".format(alt)
+
         url = self.BASE_URL + path
 
         return url
@@ -41,21 +45,12 @@ class Memegen:
     def error(self):
         return "That template doesn't exist. Type `/meme templates` to see valid templates or provide your own as a URL."
 
+def image_exists(path):
+    if path.split("://")[0] not in ["http", "https"]:
+        return False
 
-class Memeifier:
-
-    def __init__(self):
-        self.BASE_URL = "http://memeifier.com"
-
-    def image_exists(self, path):
-        if path.split("://")[0] not in ["http", "https"]:
-            return False
-
-        r = requests.head(path)
-        return r.status_code == requests.codes.ok
-
-    def build_url(self, template, top, bottom):
-        return self.BASE_URL + "/{0}/{1}/{2}".format(top or '_', bottom or '_', template)
+    r = requests.head(path)
+    return r.status_code == requests.codes.ok
 
 
 class Slack:

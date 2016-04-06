@@ -1,5 +1,5 @@
 from flask import Flask, request
-from models import Memegen, Memeifier, Slack, parse_text_into_params
+from models import Memegen, Slack, parse_text_into_params, image_exists
 
 
 app = Flask(__name__)
@@ -16,7 +16,6 @@ def meme():
         return message
 
     memegen = Memegen()
-    memeifier = Memeifier()
     slack = Slack()
 
     token = request.args["token"]
@@ -42,8 +41,8 @@ def meme():
 
     if template in valid_templates:
         meme_url = memegen.build_url(template, top, bottom)
-    elif memeifier.image_exists(template):
-        meme_url = memeifier.build_url(template, top, bottom)
+    elif image_exists(template):
+        meme_url = memegen.build_url("custom", top, bottom, template)
     else:
         return memegen.error()
 
