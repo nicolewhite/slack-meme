@@ -47,7 +47,7 @@ def meme():
     user = slack.find_user_info(user_id)
     payload.update(user)
 
-    attachments = [{"image_url": meme_url, "fallback": "Oops. Something went wrong."}]
+    attachments = [{"image_url": meme_url, "fallback": "; ".join([top, bottom])}]
     payload.update({"attachments": attachments})
 
     try:
