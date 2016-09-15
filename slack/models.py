@@ -7,7 +7,7 @@ import requests
 class Memegen:
 
     def __init__(self):
-        self.BASE_URL = "http://memegen.link"
+        self.BASE_URL = "https://memegen.link"
 
     def get_templates(self):
         response = requests.get(self.BASE_URL + "/templates").json()
