@@ -1,4 +1,3 @@
-import json
 import os
 from urllib import unquote_plus, quote
 import requests
@@ -72,7 +71,7 @@ class Slack:
         return {"username": username, "icon_url": icon_url}
 
     def post_meme_to_webhook(self, payload):
-        requests.post(self.WEBHOOK_URL, data=json.dumps(payload))
+        requests.post(self.WEBHOOK_URL, json=payload)
 
 
 def parse_text_into_params(text):
