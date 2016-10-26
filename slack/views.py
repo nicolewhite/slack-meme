@@ -7,29 +7,24 @@ app = Flask(__name__)
 
 @app.route("/")
 def meme():
-    if not request.args:
-        message = """
-        Welcome to Slack Meme!
-        Check me out on <a href="https://github.com/nicolewhite/slack-meme">GitHub</a>.
-        """
-
-        return message
-
     memegen = Memegen()
     slack = Slack()
 
+    if not request.args:
+        return memegen.help()
+
     token = request.args["token"]
-    text = request.args["text"]
+    text = request.args["text"].strip()
     channel_id = request.args["channel_id"]
     user_id = request.args["user_id"]
 
     if token != slack.SLASH_COMMAND_TOKEN:
         return "Unauthorized."
 
-    if text.strip() == "":
-        return memegen.error()
+    if text.lower() in ("help", ""):
+        return memegen.help()
 
-    if text[:9] == "templates":
+    if text.lower() == "templates":
         return memegen.list_templates()
 
     template, top, bottom = parse_text_into_params(text)
@@ -41,7 +36,7 @@ def meme():
     elif image_exists(template):
         meme_url = memegen.build_url("custom", top, bottom, template)
     else:
-        return memegen.error()
+        return memegen.bad_template(template)
 
     payload = {"channel": channel_id}
     user = slack.find_user_info(user_id)

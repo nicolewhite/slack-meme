@@ -41,8 +41,22 @@ class Memegen:
 
         return url
 
-    def error(self):
-        return "That template doesn't exist. Type `/meme templates` to see valid templates or provide your own as a URL."
+    def bad_template(self, template):
+        return ("Template `%s` doesn't exist. "
+                "Type `/meme templates` to see valid templates "
+                "or provide your own as a URL." % template)
+
+    def help(self):
+        return "\n".join([
+            "Welcome to Slack Meme!",
+            'Check me out on <https://github.com/nicolewhite/slack-meme|GitHub>.',
+            "**> Commands:**",
+            "* `/meme template_name;top_row;bottom_row` generate a meme",
+            "    (NOTE: template_name can also be a URL to an image)",
+            "* `/meme templates` View templates",
+            "* `/meme help` Shows this menu"
+        ])
+
 
 def image_exists(path):
     if path.split("://")[0] not in ["http", "https"]:
