@@ -7,27 +7,35 @@ class Memegen:
 
     def __init__(self):
         self.BASE_URL = "https://memegen.link"
+        self.template_info = self.get_template_info()
+        self.valid_templates = self.get_valid_templates()
+        self.template_list = self.get_template_list()
 
-    def get_templates(self):
-        response = requests.get(self.BASE_URL + "/api/templates/").json()
+    def get_valid_templates(self):
+        return [x[0] for x in self.template_info]
+
+    def get_template_info(self):
+        template = requests.get(self.BASE_URL + "/api/templates/").json()
 
         data = []
 
-        for key, value in response.items():
-            name = value.replace(self.BASE_URL + "/api/templates/", "")
-            description = key
-            data.append((name, description))
+        for description, api_link in template.items():
+            alias = api_link.split("/api/templates/")[1]
+            link = "https://memegen.link/{}/your-text/goes-here.jpg".format(alias)
 
-        data.sort(key=lambda tup: tup[0])
-        return data
+            alias = alias.encode('utf8')
+            description = description.encode('utf8')
+            link = link.encode('utf8')
 
-    def list_templates(self):
-        templates = self.get_templates()
+            data.append((alias, description, link))
 
+        return sorted(data, key=lambda x: x[0])
+
+    def get_template_list(self):
         help = ""
 
-        for template in templates:
-            help += "`{0}` {1}\n".format(template[0], template[1])
+        for alias, description, example_link in self.template_info:
+            help += '`<{}|{}>` {}\n'.format(example_link, alias, description)
 
         return help
 
