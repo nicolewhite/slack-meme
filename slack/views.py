@@ -1,5 +1,5 @@
 from flask import Flask, request
-from models import Memegen, Slack, parse_text_into_params, image_exists
+from slack.models import Memegen, Slack, parse_text_into_params, image_exists
 
 app = Flask(__name__)
 memegen = Memegen()

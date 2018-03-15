@@ -1,6 +1,11 @@
 import os
-from urllib import unquote_plus, quote
+
 import requests
+
+try:
+    from urllib import unquote_plus, quote
+except ImportError:
+    from urllib.parse import unquote_plus, quote
 
 
 class Memegen:
