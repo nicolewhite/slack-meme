@@ -48,7 +48,9 @@ The memes are posted under a bot in the same channel where `/meme` was called, w
    $ export SLACK_VERIFICATION_TOKEN="replace with your token"
    ```
 
-3. Create an Incoming Webhook and store the its URL in an environment variable. On the Incoming Webhooks page (under Features), slide the toggle to activate incoming webhooks. Click the button to add a new webhook.
+3. Add the necessary scopes to your app. On the OAuth & Permissions page, scroll down to find the "Scopes" section. Input `users:read` into the selection box. Confirm that the scope is listed in the table below, and click "Save Changes".
+
+4. Create an Incoming Webhook and store its URL in an environment variable. On the Incoming Webhooks page (under Features), slide the toggle to activate incoming webhooks. Click the button to add a new webhook.
 
    ![Enable incoming webhooks](support/slack-create-incoming-webhook.png)
 
@@ -58,7 +60,7 @@ The memes are posted under a bot in the same channel where `/meme` was called, w
 
    When you return to the Incoming Webhooks page, you'll find a new item in the table. Copy the Webhook URL and store it in another environment variable called `SLACK_WEBHOOK_URL`.
 
-4. Find your API token and store it in an enviornment variable. On the Install App page you'll find an Oauth Access Token. This value is used as your API token. Copy it and store it in another environment variable called `SLACK_API_TOKEN`. **Leave the Slack App configuration open, you need to finish by adding the slash command below**.
+5. Find your API token and store it in an enviornment variable. On the Install App page you'll find an Oauth Access Token. This value is used as your API token. Copy it and store it in another environment variable called `SLACK_API_TOKEN`. **Leave the Slack App configuration open, you need to finish by adding the slash command below**.
 
 ### Deploy to Heroku
 
