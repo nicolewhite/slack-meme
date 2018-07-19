@@ -2,12 +2,13 @@ from flask import Flask, request
 from slack.models import Memegen, Slack, parse_text_into_params, image_exists
 
 app = Flask(__name__)
+
 memegen = Memegen()
 slack = Slack()
 
 @app.route("/", methods=["GET", "POST"])
 def meme():
-    data = request.form if request.method == 'POST' else request.args
+    data = request.form if request.method == "POST" else request.args
     token, text, channel_id, user_id = [data[key] for key in ("token", "text", "channel_id", "user_id")]
     text = text.strip()
 

@@ -76,7 +76,7 @@ def image_exists(path):
         return False
 
     r = requests.head(path)
-    return r.status_code == requests.codes.ok
+    return r.ok
 
 
 class Slack:
