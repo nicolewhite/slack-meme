@@ -28,6 +28,7 @@ def meme():
     elif image_exists(template):
         meme_url = memegen.build_url("custom", top, bottom, template)
     else:
+        app.logger.debug("bad template", template)
         return memegen.bad_template(template)
 
     payload = {"channel": channel_id}
