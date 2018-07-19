@@ -1,12 +1,9 @@
-FROM ubuntu
+FROM python:2
 
-RUN apt-get update
-RUN apt-get install -y python python-pip build-essential libssl-dev libffi-dev python-dev
-
+COPY . /app
 WORKDIR /app
 
-ADD ./ /app
+RUN pip install pipenv
+RUN pipenv install --system --deploy
 
-RUN pip install -r ./requirements.txt
-
-CMD python run.py
+CMD ["gunicorn", "-b 0.0.0.0:5000", "wsgi"]
