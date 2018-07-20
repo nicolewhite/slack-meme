@@ -16,7 +16,9 @@ Post memes to any of your Slack channels with a slash command.
 ### Custom Templates
 Use your own image by passing its URL as the template:
 
-`/meme https://nicolewhite.github.io/images/me.jpg; hello; my name is nicole;`
+`/meme https://nicolewhite.github.io/images/me.jpg hello; my name is nicole;`
+
+**NOTE:** There's no semicolon at the end of the URL when using a custom template
 
 <img src="http://i.imgur.com/OVhBlmt.png">
 
@@ -86,7 +88,7 @@ The Request URL is the root URL for where you deployed the application. If you d
 
 Save the Slash Command integration.
 
-## Update Your Deployment
+## Update Your Heroku Deployment
 
 To update your deployment with changes from this repository, visit your app's homepage on Heroku and navigate to the section on deploying with Heroku git at https://dashboard.heroku.com/apps/your-app-name/deploy/heroku-git, replacing `your-app-name` with the name of your app. Follow the instructions there to get the Heroku toolbelt set up. Then:
 
@@ -102,6 +104,39 @@ Replace `your-app-name` with the name of your app. Once you have this set up, yo
 $ git remote add slack-meme https://github.com/nicolewhite/slack-meme
 $ git pull --rebase slack-meme master
 $ git push heroku master
+```
+
+## Deploying with Docker
+
+We've already got a `Dockerfile` ready to go. The quickest path would be to download this repo, replace the environment
+variable values in `docker-compose.yml`, and run `docker-compose up`.
+
+## Development
+
+In order to run this project locally for development, you should first install [Pipenv](https://docs.pipenv.org/).
+Once you have the `pipenv` command line tool available, you don't need to worry about setting up in a virtualenv or
+managing the dependencies yourself.
+
+Create a `.env` file in the top level directory of this project. Pipenv will automatically load the values defined into
+your environment for you. Use the following template and fill in the values with the ones you're using.
+
+```
+SLACK_WEBHOOK_URL=replace_me
+SLACK_API_TOKEN=replace_me
+SLACK_VERIFICATION_TOKEN=replace_me
+```
+
+Next, use Pipenv to install the project dependencies
+
+```
+$ pipenv install
+```
+
+Lastly, launch the project with the following command. Notice that we've passed the `--log-level=debug` flag, which
+will output useful information for development purposes. This shouldn't be used in production.
+
+```
+$ pipenv run gunicorn -b 0.0.0.0:8080 wsgi --log-level=debug
 ```
 
 ## Credits

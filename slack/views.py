@@ -21,14 +21,17 @@ def meme():
     if text.lower() == "templates":
         return memegen.template_list
 
+    app.logger.debug("text: \"%s\"", text)
+
     template, top, bottom = parse_text_into_params(text)
+    app.logger.debug("parsed text: template=\"%s\" top=\"%s\" bottom=\"%s\"", template, top, bottom)
 
     if template in memegen.valid_templates:
         meme_url = memegen.build_url(template, top, bottom)
     elif image_exists(template):
         meme_url = memegen.build_url("custom", top, bottom, template)
     else:
-        app.logger.debug("bad template", template)
+        app.logger.debug("bad template \"%s\"", template)
         return memegen.bad_template(template)
 
     payload = {"channel": channel_id}

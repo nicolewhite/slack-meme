@@ -1,4 +1,5 @@
 import os
+import re
 
 import requests
 
@@ -102,17 +103,24 @@ class Slack:
 
 
 def parse_text_into_params(text):
-    text = unquote_plus(text).strip()
+    # remove the semicolon at the end, if there is one
     text = text[:-1] if text[-1] == ";" else text
 
-    params = text.split(";")
+    url_match = re.search(r"^<(\S+)>\s", text)
+    if url_match:
+        # using a custom template
+        template = url_match.group(1)
+        remaining_text = text[url_match.end():]
+        params = remaining_text.split(";")
 
-    template = params[0].strip()
-    del params[0]
+    else:
+        # using a named template
+        params = text.split(";")
+        template = params.pop(0).strip()
 
-    params = [x.strip() for x in params]
-    params = [x.replace(" ", "_") for x in params]
-    params = [quote(x.encode("utf8")) for x in params]
+    params = [quote(x.strip().replace(" ", "_").encode("utf-8")) for x in params]
 
+    # pad the end of params to make sure its always length 2
     params += [None] * (2 - len(params))
+
     return template, params[0], params[1]
