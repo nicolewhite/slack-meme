@@ -2,11 +2,7 @@ import os
 import re
 
 import requests
-
-try:
-    from urllib import unquote_plus, quote
-except ImportError:
-    from urllib.parse import unquote_plus, quote
+from urllib.parse import unquote_plus, quote
 
 
 class Memegen:
@@ -28,10 +24,6 @@ class Memegen:
         for description, api_link in template.items():
             alias = api_link.split("/api/templates/")[1]
             link = "https://memegen.link/{}/your-text/goes-here.jpg".format(alias)
-
-            alias = alias.encode('utf8')
-            description = description.encode('utf8')
-            link = link.encode('utf8')
 
             data.append((alias, description, link))
 
@@ -118,7 +110,7 @@ def parse_text_into_params(text):
         params = text.split(";")
         template = params.pop(0).strip()
 
-    params = [quote(x.strip().replace(" ", "_").encode("utf-8")) for x in params]
+    params = [quote(x.strip().replace(" ", "_")) for x in params]
 
     # pad the end of params to make sure its always length 2
     params += [None] * (2 - len(params))
