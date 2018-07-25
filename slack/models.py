@@ -85,7 +85,7 @@ class Slack:
         response = requests.get(url)
 
         user = response.json()["user"]
-        username = user["name"]
+        username = user["profile"]["display_name"]
         icon_url = user["profile"]["image_48"]
 
         return {"username": username, "icon_url": icon_url}
